@@ -1,0 +1,23 @@
+CREATE DATABASE Reservation;
+USE Reservation;
+create table user1(user_id varchar(20) not null,name char(15) not null,age int not null check(age>=18),contact_no bigint not null,email varchar(20),primary key(user_id));
+create table payment(amount decimal(5,2) not null,transaction_id int not null,date varchar(15),primary key(transaction_id));
+create table train(train_no int not null,source char(10),destination char(10),dept_time varchar(10),arr_time varchar(10),primary key(train_no));
+create table ticket(pnr int not null,class varchar(10),distance int,train_id int references train(train_no),primary key(pnr));
+insert into user1 values('vidhi9999','vidhi',28,12345,'vidhi@gmail.com'),('adi1012','aditya',21,77777,'cr7adi@gmail.com'),('sapna8899','sapna',25,19999,'sapna@gmail.com'),('neel1111','neel',26,11111,'neel@gmail.com'),('namrata88','namrata',27,22222,'sapna@coditas.com');
+desc user1;
+alter table ticket add column user_id varchar(20) references user1(user_id);
+ insert into train values(22345,'INDB','MUM','14:10','03:30'),(12365,'INDB','PUN','15:10','05:30'),(12325,'INDB','AMD','14:10','03:50'),(12345,'SUR','MUM','12:10','01:30'),(12225,'NZM','MUM','15:10','02:30'); 
+ insert into ticket values(11111,'1AC',200,22345,'vidhi9999');
+ insert into payment values(100.98,1234,'23/04/21');
+ insert into payment values(130.98,1214,'23/05/21'),(200.98,3234,'11/04/21');
+ insert into ticket values(11121,'1AC',200,12365,'cr7adi');
+ 
+ select name from user1;
+select name from user1 where user_id like '%adi__12%';
+select * from train where train_no=22345 and source='INDB';
+update train set destination='BPL' where train_no=12365;
+select * from user1 order by name desc;
+select count(name) from user1 where age<=26;
+select date,sum(amount) as total from payment group by date;
+select name from user1 where user_id like '%adi__12%';
