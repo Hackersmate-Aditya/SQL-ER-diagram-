@@ -21,3 +21,6 @@ select * from user1 order by name desc;
 select count(name) from user1 where age<=26;
 select date,sum(amount) as total from payment group by date;
 select name from user1 where user_id like '%adi__12%';
+select train_no from train where source like '__DB';
+select transaction_id,sum(amount) as total from payment group by transaction_id;
+select transaction_id,sum(amount) as total from payment group by transaction_id having total>150;
