@@ -5,17 +5,22 @@ create table oreder(OID int not null,date datetime,C_id int references customers
 create table employees(empid int not null,empname varchar(20),m_id int ,primary key(empid));
 insert into employees values(101,'Aditya',102),(102,'Devyani',105),(103,'Neel',102),(104,'Pooja',102),(105,'Sapna',null),(106,'Namrata',107);
 insert into oreder values(101,'2021-08-20 14:20:00',3,1200.22),(102,'2021-08-21 11:20:00',4,600.00),(103,'2021-08-20 05:40:00',1,700.99),(104,'2021-08-22 15:20:30',3,800.66),(105,'2021-08-10 19:20:20',1,900.00),(106,'2021-08-20 09:20:00',4,1230.99);
+
+#inner join#
 select id,name,amount,date
 from customers
 inner join oreder
 on customers.id=oreder.c_id;
 
 
+#left join#
 select id,name,amount,date
 from customers
 left join oreder
 on customers.id=oreder.c_id;
 
+
+#right join#
 select id,name,amount,date
 from customers
 right join oreder
@@ -27,14 +32,14 @@ right join oreder
 on customers.id=oreder.c_id;
 
 
-
+#full#
 select id,name,amount,date
 from customers
 full join oreder
 on customers.id=oreder.c_id;
 
 
-
+#union#
 select id,name,amount,date
 from customers
 left join oreder
@@ -48,32 +53,32 @@ on customers.id=oreder.c_id;
 
 
 
-
+#alias same table#
 select E.empname as employee, M.empname as manager
 from employees E
 join employees M
 on E.m_id=M.empid;
 
-
+#nested#
 select * from customers
 where id in
 (select distinct c_id
 from oreder
 where amount>900); 
 
-
+#wildcards#
 delete from customers
 where id in
 (select c_id 
 from oreder
 where date like '2021-08-21%');
 
-
+#correlated#
 select * from customers where
 exists(select c_id from oreder
 where oreder.C_id=customers.id);
 
-
+#view#
 create view customer_view
 as
 select name,id,amount,date
